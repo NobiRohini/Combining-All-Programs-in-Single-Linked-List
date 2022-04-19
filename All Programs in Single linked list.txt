@@ -1,0 +1,521 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+struct node
+
+{
+
+int data;
+
+struct node *next;
+
+}*start=NULL,*ptr,*newnode,*ptr1;
+
+void create(int value)
+
+{
+
+int i;
+
+newnode=(struct node *)malloc(sizeof(struct node));
+
+newnode->data=value;
+
+newnode->next=NULL;
+
+if(start==NULL)
+
+start=newnode;
+
+else
+
+{
+
+    ptr=start;
+
+  while(ptr->next!=NULL)
+
+  ptr=ptr->next;
+
+  ptr->next=newnode;
+
+}
+
+printf("Insertion Sucess");
+
+}
+
+ 
+
+void insert_beg(int value)
+
+{
+
+newnode=(struct node*)malloc(sizeof(struct node));
+
+newnode->data=value;
+
+newnode->next=NULL;
+
+if(start==NULL)
+
+start=newnode;
+
+else
+
+{
+
+newnode->next=start;
+
+start=newnode;
+
+}
+
+printf("Insertion Sucess");
+
+}
+
+void insert_end(int value)
+
+{
+
+newnode=(struct node*)malloc(sizeof(struct node));
+
+newnode->data=value;
+
+newnode->next=NULL;
+
+if(start==NULL)
+
+start=newnode;
+
+ptr=start;
+
+while(ptr->next!=NULL)
+
+ptr=ptr->next;
+
+ptr->next=newnode;
+
+printf("Insertion Sucess");
+
+}
+
+void insert_pos(int value,int pos)
+
+{
+
+int i,c=1;
+
+newnode=(struct node*)malloc(sizeof(struct node));
+
+newnode->data=value;
+
+newnode->next=NULL;
+
+if(start==NULL)
+
+{
+
+start=newnode;
+
+ptr=start;
+
+}
+
+else
+
+{
+
+while(c!=pos-1&&ptr->next!=NULL)
+
+{
+
+c++;
+
+ptr=ptr->next;
+
+}
+
+newnode->next=ptr->next;
+
+ptr->next=newnode;
+
+printf("Insertion Sucess");
+
+}
+
+}
+
+void display()
+
+{
+
+if(start==NULL)
+
+printf("\n No nodes in the list");
+
+else
+
+{
+
+ptr=start;
+
+printf("Elements in Linked List \n");
+
+while(ptr!=NULL)
+
+{
+
+printf(" %d-> ",ptr->data);
+
+ptr=ptr->next;
+
+}
+
+}
+
+}
+
+void del_beg()
+
+{
+
+if(start==NULL)
+
+{
+
+printf("\n No nodes in the list");
+
+}
+
+else
+
+{
+
+ptr=start;
+
+printf("the deleted element is %d",ptr->data);
+
+start=ptr->next;
+
+free(ptr);
+
+}
+
+}
+
+void del_end()
+
+{
+
+if(start==NULL)
+
+{
+
+printf("\n No nodes in the list");
+
+}
+
+else
+
+{
+
+ptr=start;
+
+while(ptr->next->next!=NULL)
+
+ptr=ptr->next;
+
+printf("the deleted element is %d",ptr->next->data);
+
+free(ptr->next);
+
+ptr->next=NULL;
+
+}
+
+}
+
+void del_pos(int pos)
+
+{
+
+int i;
+
+struct node *ptr1;
+
+if(start==NULL)
+
+{
+
+printf("\n No nodes in the list");
+
+}
+
+else
+
+{
+
+int c=1;
+
+ptr=start;
+
+while(c!=pos-1&&ptr->next!=NULL)
+
+{
+
+ptr=ptr->next;
+
+c++;
+
+}
+
+ptr1=ptr->next;
+
+printf("the deleted element is %d",ptr1->data);
+
+ptr->next=ptr1->next;
+
+free(ptr1);
+
+}
+
+}
+
+void search()
+
+{
+
+int key,f=0;
+
+printf("\n Enter key data");
+
+scanf("%d",&key);
+
+ptr=start;
+
+while(ptr!=NULL)
+
+{
+
+  if(ptr->data==key)
+
+  {
+
+    f=1;
+
+    break;
+
+  }
+
+  ptr=ptr->next;
+
+}
+
+if(f==1)
+
+printf("\n Given key found in list");
+
+else
+
+printf("\n Given key not in list");
+
+}
+
+void count()
+
+{
+
+int c;
+
+if(start==NULL)
+
+c=0;
+
+else
+
+{
+
+c=1;
+
+ptr=start;
+
+while(ptr->next!=NULL)
+
+{
+
+ptr=ptr->next;
+
+c++;
+
+}
+
+}
+
+printf("\n Number of nodes are:%d",c);
+
+}
+
+void sum()
+
+{
+
+int s=0;
+
+if(start==NULL)
+
+s=0;
+
+else
+
+{
+
+ptr=start;
+
+while(ptr!=NULL)
+
+{
+
+s=s+ptr->data;
+
+ptr=ptr->next;
+
+}
+
+}
+
+printf("\n Sum=%d",s);
+
+}
+
+int main()
+
+{
+
+int choice,pos,value,n,i;
+
+while(1)
+
+{
+
+printf("\n1.CREATE \n 2.INSERT AT BEGIN\n3.INSERT AT END\n4.INSERT AT POSITION\n 5.DISPLAY\n6.DELETE AT BEGIN\n7.DELETE AT END\n8.DELETE AT POSITION\n9.SEARCH\n10.COUNT\n11.SUM \n12.EXIT \n Enter Your Choice \n");
+
+scanf("%d",&choice);
+
+switch(choice)
+
+{
+
+  case 1:
+
+           printf("enter n nodes\n");
+
+  scanf("%d",&n); 
+
+  for(i=1;i<=n;i++)
+
+  {
+
+  printf("\nenter value");
+
+  scanf("%d",&value);
+
+  create(value);
+
+    }
+
+  break;
+
+case 2:printf("\n Enter an data");
+
+scanf("%d",&value);
+
+insert_beg(value);
+
+break;
+
+case 3:printf("\n Enter an data");
+
+scanf("%d",&value);
+
+insert_end(value);
+
+break;
+
+case 4:
+
+  printf("\n Enter an data");
+
+scanf("%d",&value);
+
+printf("\n Enter position");
+
+scanf("%d",&pos);
+
+insert_pos(value,pos);
+
+break;
+
+case 5:
+
+display();
+
+break;
+
+case 6:
+
+del_beg();
+
+break;
+
+case 7:
+
+del_end();
+
+break;
+
+case 8:
+
+  printf("\n Enter position");
+
+    scanf("%d",&pos);
+
+del_pos(pos);
+
+break;
+
+case 9:
+
+search();
+
+break;
+
+case 10:
+
+count();
+
+break;
+
+case 11:
+
+sum();
+
+break;
+
+case 12:
+
+  exit(0);
+
+  break;
+
+default:
+
+printf("\n INVALIED CHOICE");
+
+}
+
+}
+
+}
